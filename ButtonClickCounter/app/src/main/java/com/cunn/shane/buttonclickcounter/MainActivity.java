@@ -19,23 +19,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: in ");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         userInput = (EditText) findViewById(R.id.editText);
-
+        userInput.setText("");  //clears the EditText of text, replaces with a empty string
         Button button = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView);
-
         textView.setText("");  //clears the textview of text, replaces with a empty string
         textView.setMovementMethod(new ScrollingMovementMethod());
         View.OnClickListener ourOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String result = userInput.getText().toString();
                 result = result + "\n";
                 textView.append(result);
                 userInput.setText("");  //clears the EditText of text, replaces with a empty string
+
 
             }
         };
