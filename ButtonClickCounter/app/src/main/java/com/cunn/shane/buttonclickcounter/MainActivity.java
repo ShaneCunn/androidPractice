@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText userInput;
     private TextView textView;
     private static final String TAG = "MainActivity";
+    private final String TEXT_CONTENTS = "TextContents";
 
 
     @Override
@@ -67,12 +68,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onRestart: out");
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d(TAG, "onRestoreInstanceState: in");
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.d(TAG, "onRestoreInstanceState: out");
-    }
 
     @Override
     protected void onStop() {
@@ -91,8 +86,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         Log.d(TAG, "onSaveInstanceState: in");
+
+        outState.putString(TEXT_CONTENTS, textView.getText().toString());
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState: out");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d(TAG, "onRestoreInstanceState: in");
+        super.onRestoreInstanceState(savedInstanceState);
+        //  String savedString = savedInstanceState.getString(TEXT_CONTENTS);
+        //  textView.setText(savedString);
+        textView.setText(savedInstanceState.getString(TEXT_CONTENTS));
+
+        Log.d(TAG, "onRestoreInstanceState: out");
     }
 
     @Override
