@@ -2,6 +2,7 @@ package com.cunn.shane.calculator;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,6 +45,33 @@ public class MainActivity extends AppCompatActivity {
         Button buttonMulti = (Button) findViewById(R.id.buttonMulti);
         Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
         Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
+
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Button b = (Button) view;
+                newNumber.append(b.getText().toString());
+
+            }
+        };
+        button0.setOnClickListener(listener);
+        button1.setOnClickListener(listener);
+        button2.setOnClickListener(listener);
+        button3.setOnClickListener(listener);
+        button4.setOnClickListener(listener);
+        button5.setOnClickListener(listener);
+        button6.setOnClickListener(listener);
+        button7.setOnClickListener(listener);
+        button8.setOnClickListener(listener);
+        button9.setOnClickListener(listener);
+        buttonDot.setOnClickListener(listener);
+
+
+
+
+
 
 
 
