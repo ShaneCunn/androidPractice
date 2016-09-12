@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import static com.cunn.shane.calculator.R.id.operation;
+
 public class MainActivity extends AppCompatActivity {
     private EditText result;
     private EditText newNumber;
@@ -17,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
     //private Double operand2 = null;
     private String pendingOperation = "=";
 
+    private static final String STATE_PENDING_OPERATION = "PendingOperation";
+    private static final String STATE_OPERAND1 = "Operand1";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         result = (EditText) findViewById(R.id.result);
         newNumber = (EditText) findViewById(R.id.newNumber);
-        displayOperation = (TextView) findViewById(R.id.operation);
+        displayOperation = (TextView) findViewById(operation);
 
         Button button0 = (Button) findViewById(R.id.button0);
         Button button1 = (Button) findViewById(R.id.button1);
@@ -96,6 +102,31 @@ public class MainActivity extends AppCompatActivity {
         buttonMulti.setOnClickListener(oplistener);
         buttonMinus.setOnClickListener(oplistener);
         buttonPlus.setOnClickListener(oplistener);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putString(STATE_PENDING_OPERATION, pendingOperation);
+        if (operand1 != null) {
+
+            outState.putDouble(STATE_OPERAND1, operand1);
+        }
+        super.onSaveInstanceState(outState);
+
+
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+
+        super.onRestoreInstanceState(savedInstanceState);
+        pendingOperation = savedInstanceState.getString(STATE_PENDING_OPERATION);
+        operand1 = savedInstanceState.getDouble(STATE_OPERAND1);
+        displayOperation.setText(pendingOperation);
     }
 
     private void performOperation(Double value, String operation) {
