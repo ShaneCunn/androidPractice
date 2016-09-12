@@ -102,6 +102,28 @@ public class MainActivity extends AppCompatActivity {
         buttonMulti.setOnClickListener(oplistener);
         buttonMinus.setOnClickListener(oplistener);
         buttonPlus.setOnClickListener(oplistener);
+
+
+        Button buttonNeg = (Button) findViewById(R.id.buttonNeg);
+
+        buttonNeg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = newNumber.getText().toString();
+                if (value.length() == 0) {
+                    newNumber.setText("-");
+                } else {
+                    try {
+                        Double doubleValue = Double.valueOf(value);
+                        doubleValue *= -1;
+                        newNumber.setText(doubleValue.toString());
+                    } catch (NumberFormatException e) {
+                        // newNumber was - or . so it was cleared
+                        newNumber.setText("");
+                    }
+                }
+            }
+        });
     }
 
 
